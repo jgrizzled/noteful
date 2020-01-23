@@ -1,11 +1,20 @@
 import { createGlobalStyle } from 'styled-components';
-// CSS Reset
-import { Normalize } from 'styled-normalize';
-import baseStyle from './base.css';
-import fonts from './fonts.css';
 
+// global app styles
 export default createGlobalStyle`
-  ${Normalize}
-  ${fonts}
-  ${baseStyle}
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-color: ${props => props.theme.color.background};
+    font-family: ${props => props.theme.font.main};
+    color: ${props => props.theme.color.onBackground};
+  }
+  a {
+    color: ${props => props.theme.color.link};
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
 `;

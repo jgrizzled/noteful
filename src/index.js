@@ -1,17 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GlobalStyle from 'styles/GlobalStyle';
 import App from 'App';
-import themes from 'styles/themes';
 import { BrowserRouter } from 'react-router-dom';
-import dummyStore from 'store/dummy-store';
+// base css
+import 'normalize.css';
+import 'styles/fonts.css';
 
 ReactDOM.render(
-  <>
-    <GlobalStyle />
-    <BrowserRouter>
-      <App themes={themes} store={dummyStore} />
-    </BrowserRouter>
-  </>,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
   document.getElementById('root')
 );

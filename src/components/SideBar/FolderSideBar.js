@@ -1,9 +1,15 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import SideBar from 'components/SideBar/SideBar';
-import SideBarHeader from 'components/SideBar/SideBarHeader';
+import SidebarHeader from 'components/sidebar/SidebarHeader';
 import BigButton from 'components/common/BigButton';
+import NotesContext from 'contexts/NotesContext';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const FolderList = styled.ul`
   padding: 0;
@@ -28,13 +34,15 @@ const FolderList = styled.ul`
 
 export default props => {
   const history = useHistory();
+  const params = useParams();
+  const { folders } = useContext(NotesContext);
   return (
-    <SideBar>
-      <SideBarHeader>Folders</SideBarHeader>
+    <Container>
+      <SidebarHeader>Folders</SidebarHeader>
       <FolderList>
-        {props.folders.map((f, i) => {
+        {folders.map((f, i) => {
           let folderClass = '';
-          if (props.activeFolder && props.activeFolder.id === f.id)
+          if (params.folderId && params.folderId === f.id)
             folderClass = 'active';
           return (
             <li
@@ -48,6 +56,6 @@ export default props => {
         })}
       </FolderList>
       <BigButton>Add Folder</BigButton>
-    </SideBar>
+    </Container>
   );
 };

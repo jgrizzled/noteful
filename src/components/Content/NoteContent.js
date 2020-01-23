@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import ContentSection from 'components/Content/ContentSection';
-import NoteCard from 'components/Content/NoteCard';
+import NoteCard from 'components/content/NoteCard';
+import { useParams } from 'react-router-dom';
+import NotesContext from 'contexts/NotesContext';
 
 const Container = styled.div`
   display: flex;
@@ -15,11 +16,14 @@ const Text = styled.p`
   margin: 0;
 `;
 
-export default props => (
-  <ContentSection>
+export default () => {
+  const params = useParams();
+  const { notes } = useContext(NotesContext);
+  const note = notes.find(n => n.id === params.noteId);
+  return (
     <Container>
-      <NoteCard note={props.note} />
-      <Text>{props.note.content}</Text>
+      <NoteCard note={note} />
+      <Text>{note.content}</Text>
     </Container>
-  </ContentSection>
-);
+  );
+};

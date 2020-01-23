@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import ContentSection from 'components/Content/ContentSection';
-import NoteCard from 'components/Content/NoteCard';
+import NoteCard from 'components/content/NoteCard';
+import NotesContext from 'contexts/NotesContext';
 
 const Container = styled.div`
   display: flex;
@@ -9,12 +10,17 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default props => (
-  <ContentSection>
+export default props => {
+  const params = useParams();
+  const { notes } = useContext(NotesContext);
+  let renderNotes = notes;
+  if (params.folderId)
+    renderNotes = notes.filter(n => n.folderId === params.folderId);
+  return (
     <Container>
-      {props.notes.map((n, i) => (
+      {renderNotes.map((n, i) => (
         <NoteCard note={n} key={i} />
       ))}
     </Container>
-  </ContentSection>
-);
+  );
+};

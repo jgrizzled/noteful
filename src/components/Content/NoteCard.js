@@ -1,10 +1,11 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import * as moment from 'moment';
-import SmallButton from 'components/common/SmallButton';
+import DeleteButton from 'components/content/DeleteButton';
+import NotesContext from 'contexts/NotesContext';
 
-const Card = styled.div`
+const Card = styled.section`
   background-color: ${props => props.theme.color.surface};
   color: ${props => props.theme.color.onSurface};
   border: 1px solid ${props => props.theme.color.onSurface};
@@ -28,12 +29,21 @@ const Card = styled.div`
 
 export default props => {
   const history = useHistory();
+  const { deleteNote } = useContext(NotesContext);
+  const params = useParams();
+  const handleClick = (e, noteId) => {
+    e.stopPropagation();
+    deleteNote(noteId);
+    if (params.noteId === noteId) history.push('/');
+  };
   return (
     <Card onClick={() => history.push(`/note/${props.note.id}`)}>
       <h2>{props.note.name}</h2>
       <p>
         Last modified on {moment(props.note.modified).format('Do MMM YYYY')}
-        <SmallButton>Delete</SmallButton>
+        <DeleteButton onClick={e => handleClick(e, props.note.id)}>
+          Delete
+        </DeleteButton>
       </p>
     </Card>
   );
