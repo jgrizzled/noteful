@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<div
+  className="sc-AykKG iXeyVM"
+>
+  <button
+    className="sc-AykKC idWUwc"
+    onClick={[Function]}
+  >
+    Add Note
+  </button>
+  <section
+    className="sc-AykKE dMUvDE"
+    onClick={[Function]}
+  >
+    <h2>
+      test note
+    </h2>
+    <p>
+      Last modified on 
+      Invalid date
+      <button
+        className="sc-AykKC sc-AykKD gVWOnP"
+        onClick={[Function]}
+      >
+        Delete
+      </button>
+    </p>
+  </section>
+</div>
+`;

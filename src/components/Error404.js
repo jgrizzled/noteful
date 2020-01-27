@@ -1,11 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import ErrorMessage from 'components/common/ErrorMessage';
 
-const Container = styled.p`
-  color: ${props => props.theme.color.error};
-  margin: 1rem auto;
-  font-size: ${props => props.theme.fontSize.large};
-  font-weight: ${props => props.theme.fontWeight.bold};
-`;
+const Error404 = () => <ErrorMessage>Error: page not found</ErrorMessage>;
 
-export default () => <Container>Error: page not found</Container>;
+export default Error404;

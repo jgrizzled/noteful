@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<form
+  className="sc-AykKE kYhevL"
+  onSubmit={[Function]}
+>
+  <div>
+    <label
+      htmlFor="name"
+    >
+      Name: 
+    </label>
+    <input
+      className="sc-AykKF hSvPxc"
+      id="name"
+      name="name"
+      onChange={[Function]}
+      required={true}
+      value=""
+    />
+  </div>
+  <button
+    className="sc-AykKC idWUwc"
+    type="submit"
+  >
+    Add Folder
+  </button>
+</form>
+`;

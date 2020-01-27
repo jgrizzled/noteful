@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<select
+  className="sc-AykKC iHUrAK"
+  name="folderId"
+  onChange={[Function]}
+  value="0"
+>
+  <option
+    value="0"
+  >
+    test folder
+  </option>
+</select>
+`;

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<form
+  className="sc-AykKF fGgBWA"
+  onSubmit={[Function]}
+>
+  <div>
+    <label
+      htmlFor="name"
+    >
+      Name: 
+    </label>
+    <input
+      className="sc-AykKG hTwmRJ"
+      id="name"
+      name="name"
+      onChange={[Function]}
+      required={true}
+      value=""
+    />
+  </div>
+  <div>
+    <label
+      htmlFor="folderId"
+    >
+      Folder: 
+    </label>
+    <select
+      className="sc-AykKD cMrhNb"
+      name="folderId"
+      onChange={[Function]}
+      value="0"
+    >
+      <option
+        value="0"
+      >
+        test folder
+      </option>
+    </select>
+  </div>
+  <textarea
+    className="sc-AykKH giSvea"
+    name="content"
+    onChange={[Function]}
+    placeholder="start typing..."
+    required={true}
+    value=""
+  />
+  <button
+    className="sc-AykKC idWUwc"
+    type="submit"
+  >
+    Add Note
+  </button>
+</form>
+`;

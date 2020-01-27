@@ -1,11 +1,9 @@
-// form to add new note
+// form to add new folder
 
 import React, { useState, useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import moment from 'moment';
 import Button from 'components/common/Button';
-import FolderSelector from 'components/forms/FolderSelector';
 import NotesContext from 'contexts/NotesContext';
 import ErrorMessage from 'components/common/ErrorMessage';
 
@@ -23,28 +21,12 @@ const NameInput = styled.input`
   padding: 0.25rem;
 `;
 
-const ContentInput = styled.textarea`
-  width: 100%;
-  height: 80%;
-  margin: 1rem auto;
-  padding: 1rem;
-  line-height: 1.5rem;
-`;
-
-const AddNote = () => {
-  const params = useParams();
+const AddFolder = () => {
   const history = useHistory();
-  const { folders, addNote } = useContext(NotesContext);
-  let folderId = folders[0].id;
-  if (params.folderId) {
-    const matchFolder = folders.find(f => String(f.id) === params.folderId);
-    if (matchFolder) folderId = matchFolder.id;
-  }
+  const { addFolder } = useContext(NotesContext);
 
   const [state, setState] = useState({
     name: '',
-    folderId,
-    content: '',
     errorMessage: null
   });
 
@@ -54,14 +36,9 @@ const AddNote = () => {
     setState(prevState => ({ ...prevState, name: alphanumericValue }));
   };
 
-  const onChange = e => {
-    const { name, value } = e.target;
-    setState(prevState => ({ ...prevState, [name]: value }));
-  };
-
   const handleSubmit = async e => {
     e.preventDefault();
-    const { name, folderId, content } = state;
+    const { name } = state;
     const formattedName = name.replace(/\s+/g, ' ').trim();
     const noSpacesName = formattedName.replace(/\s/g, '');
     if (noSpacesName.length === 0) {
@@ -71,10 +48,10 @@ const AddNote = () => {
       }));
       return;
     }
-    const modified = moment().toISOString();
-    const note = { name: formattedName, folderId, content, modified };
-    if (await addNote(note)) history.push(`/folder/${folderId}`);
-    else console.log('add note failed');
+    const folder = { name: formattedName };
+    const id = await addFolder(folder);
+    if (id) history.push(`/folder/${id}`);
+    else console.log('add folder failed');
   };
 
   return (
@@ -90,27 +67,11 @@ const AddNote = () => {
           required
         />
       </div>
-      <div>
-        <label htmlFor='folderId'>Folder:&nbsp;</label>
-        <FolderSelector
-          name='folderId'
-          id='folderId'
-          folderId={state.folderId}
-          onChange={onChange}
-        />
-      </div>
-      <ContentInput
-        value={state.content}
-        name='content'
-        placeholder='start typing...'
-        onChange={onChange}
-        required
-      />
       <Button large type='submit'>
-        Add Note
+        Add Folder
       </Button>
     </Form>
   );
 };
 
-export default AddNote;
+export default AddFolder;

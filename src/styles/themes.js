@@ -1,4 +1,5 @@
 // light and dark themes
+
 const baseTheme = {
   fontSize: {
     small: '0.85rem',
@@ -14,12 +15,6 @@ const baseTheme = {
     normal: '400',
     bold: '700'
   },
-  space: {
-    small: '0.5rem',
-    medium: '1rem',
-    large: '2rem',
-    extraLarge: '4rem'
-  },
   breakpoint: {
     medium: '600px',
     large: '1000px'
@@ -29,38 +24,38 @@ const baseTheme = {
 const lightTheme = {
   ...baseTheme,
   color: {
-    primary: '#6200EE',
-    primaryVariant: '#3700B3',
-    secondary: '#03DAC6',
-    secondaryVariant: '#018786',
+    primary: '#2bbd7e',
     background: '#FFFFFF',
     surface: '#f2f2f2',
     error: '#B00020',
-    onPrimary: '#FFFFFF',
-    onSecondary: '#000000',
+    onPrimary: '#000000',
     onBackground: '#000000',
     onSurface: '#000000',
-    onError: '#FFFFFF',
     link: '#1890ff'
+  },
+  boxShadow: {
+    normal: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+    normalHover: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
   }
 };
 
 const darkTheme = {
   ...baseTheme,
   color: {
-    primary: '#BB86FC',
-    primaryVariant: '#3700B3',
-    secondary: '#03DAC6',
-    secondaryVariant: '#018786',
+    primary: '#2bbd7e',
     background: '#121212',
     surface: '#333333',
     error: '#CF6679',
     onPrimary: '#000000',
-    onSecondary: '#000000',
     onBackground: '#FFFFFF',
     onSurface: '#FFFFFF',
-    onError: '#000000',
     link: '#99ceff'
+  },
+  boxShadow: {
+    normal:
+      '0 1px 3px rgba(255, 255, 255, 0.25), 0 1px 2px rgba(255, 255, 255, 0.25)',
+    normalHover:
+      '0px 5px 14px rgba(255, 255, 255, 0.5), 0px 3px 5px rgba(255, 255, 255, 0.22)'
   }
 };
 

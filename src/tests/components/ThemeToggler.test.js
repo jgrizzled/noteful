@@ -1,25 +1,21 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from 'App';
-import themes from 'styles/themes';
+import ThemeToggler from 'components/ThemeToggler';
 
-const app = (
-  <BrowserRouter>
-    <App themes={themes} />
-  </BrowserRouter>
+const themeToggler = (
+  <ThemeToggler toggleTheme={() => null} isDarkTheme={false} />
 );
 
 // smoke test
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(app, div);
+  ReactDOM.render(themeToggler, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 // shallow snapshot test
 it('renders as expected', () => {
-  const tree = renderer.create(app).toJSON();
+  const tree = renderer.create(themeToggler).toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -1,5 +1,8 @@
+// moon/sun icon to toggle dark theme
+
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +13,7 @@ const Container = styled.span`
   font-size: 1.5rem;
 `;
 
-export default props => (
+const ThemeToggler = props => (
   <Container onClick={props.toggleTheme}>
     {props.isDarkTheme ? (
       <FontAwesomeIcon icon={faSun} />
@@ -19,3 +22,10 @@ export default props => (
     )}
   </Container>
 );
+
+ThemeToggler.propTypes = {
+  toggleTheme: PropTypes.func.isRequired,
+  isDarkTheme: PropTypes.bool.isRequired
+};
+
+export default ThemeToggler;

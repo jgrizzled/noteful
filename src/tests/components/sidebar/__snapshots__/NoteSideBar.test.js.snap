@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders as expected 1`] = `
+<div
+  className="sc-AykKE hBEDvC"
+>
+  <h2
+    className="sc-AykKD emnyUS"
+  >
+    
+  </h2>
+  <button
+    className="sc-AykKC idWUwc"
+    onClick={[Function]}
+  >
+    Back
+  </button>
+</div>
+`;
