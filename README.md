@@ -4,20 +4,20 @@ React note app for Thinkful. Connects to [noteful-json-server](https://github.co
 
 ## Install
 
-`yarn install`
+`yarn install` or `npm install`
 
 ## Dev server
 
-`yarn start`
+`yarn start` or `npm start`
 
 ## Test
 
-`yarn test`
+`yarn test` or `npm test`
 
 ## Build
 
-`yarn build`
+`yarn build` or `npm build`
 
 ## Build server
 
-`yarn serve`
+`yarn serve` or `npm serve`
