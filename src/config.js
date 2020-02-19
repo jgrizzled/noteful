@@ -1,3 +1,3 @@
 export default {
-  API_URL: 'http://localhost:8000/api'
+  API_URL: 'https://mysterious-brushlands-74509.herokuapp.com/api'
 };
