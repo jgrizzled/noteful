@@ -7,14 +7,14 @@ exports[`renders as expected 1`] = `
 >
   <div>
     <label
-      htmlFor="name"
+      htmlFor="title"
     >
-      Name: 
+      Title: 
     </label>
     <input
       className="sc-AykKG hTwmRJ"
-      id="name"
-      name="name"
+      id="title"
+      name="title"
       onChange={[Function]}
       required={true}
       value=""
@@ -22,18 +22,18 @@ exports[`renders as expected 1`] = `
   </div>
   <div>
     <label
-      htmlFor="folderId"
+      htmlFor="folder_id"
     >
       Folder: 
     </label>
     <select
       className="sc-AykKD cMrhNb"
-      name="folderId"
+      name="folder_id"
       onChange={[Function]}
-      value="0"
+      value={0}
     >
       <option
-        value="0"
+        value={0}
       >
         test folder
       </option>
@@ -51,7 +51,7 @@ exports[`renders as expected 1`] = `
     className="sc-AykKC idWUwc"
     type="submit"
   >
-    Add Note
+    Submit
   </button>
 </form>
 `;

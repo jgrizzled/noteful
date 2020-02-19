@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders as expected 1`] = `
+exports[`ThemeToggler renders as expected 1`] = `
 <span
   className="sc-AykKC fhhgou"
-  onClick={[Function]}
+  onClick={[MockFunction]}
 >
   <svg
     aria-hidden="true"

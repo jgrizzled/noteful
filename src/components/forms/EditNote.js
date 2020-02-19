@@ -2,22 +2,18 @@
 
 import React, { useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import moment from 'moment';
 import NotesContext from 'contexts/NotesContext';
 import NoteForm from 'components/forms/NoteForm';
 import ErrorMessage from 'components/common/ErrorMessage';
 
-export default function AddNote() {
+export default function EditNote() {
   const params = useParams();
   const history = useHistory();
   const [error, setError] = useState(null);
-  const { folders, addNote } = useContext(NotesContext);
-  if (folders.length === 0)
-    return <ErrorMessage>Please create a folder</ErrorMessage>;
-  let folder_id = folders[0].id;
-  if (params.folder_id) {
-    const matchFolder = folders.find(f => f.id === Number(params.folder_id));
-    if (matchFolder) folder_id = matchFolder.id;
-  }
+  const { notes, modifyNote } = useContext(NotesContext);
+  const note = notes.find(n => n.id === Number(params.note_id));
+  if (!note) return <ErrorMessage>Note not found</ErrorMessage>;
 
   const handleSubmit = async (e, title, folder_id, content) => {
     e.preventDefault();
@@ -27,15 +23,24 @@ export default function AddNote() {
       setError('Please enter a title');
       return;
     }
+    const date_modified = moment().toISOString();
     folder_id = Number(folder_id);
-    const note = { title: formattedTitle, folder_id, content };
-    if (await addNote(note)) history.push(`/folder/${folder_id}`);
-    else console.log('add note failed');
+    const modifiedNote = {
+      id: note.id,
+      title: formattedTitle,
+      folder_id,
+      content,
+      date_modified
+    };
+    if (await modifyNote(modifiedNote)) history.push(`/note/${note.id}`);
+    else console.log('modify note failed');
   };
 
   return (
     <NoteForm
-      folder_id={folder_id}
+      title={note.title}
+      folder_id={note.folder_id}
+      content={note.content}
       errorMessage={error}
       handleSubmit={handleSubmit}
     />

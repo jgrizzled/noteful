@@ -24,7 +24,7 @@ exports[`renders as expected 1`] = `
     className="sc-AykKC idWUwc"
     type="submit"
   >
-    Add Folder
+    Submit
   </button>
 </form>
 `;

@@ -12,7 +12,7 @@ const Select = styled.select`
 const FolderSelector = props => {
   const { folders } = useContext(NotesContext);
   return (
-    <Select value={props.folderId} name='folderId' onChange={props.onChange}>
+    <Select value={props.folder_id} name='folder_id' onChange={props.onChange}>
       {folders.map((f, i) => (
         <option value={f.id} key={i}>
           {f.name}
@@ -23,7 +23,8 @@ const FolderSelector = props => {
 };
 
 FolderSelector.propTypes = {
-  folderId: PropTypes.string.isRequired,
+  folder_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   onChange: PropTypes.func.isRequired
 };
 

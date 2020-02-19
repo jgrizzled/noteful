@@ -1,21 +1,24 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import ReactDOM from 'react-dom';
 import ThemeToggler from 'components/ThemeToggler';
 
-const themeToggler = (
-  <ThemeToggler toggleTheme={() => null} isDarkTheme={false} />
-);
+const onClick = jest.fn();
+const themeToggler = <ThemeToggler toggleTheme={onClick} isDarkTheme={false} />;
 
-// smoke test
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(themeToggler, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+describe('ThemeToggler', () => {
+  // smoke test
+  it('renders without crashing', () => {
+    Enzyme.mount(themeToggler);
+  });
 
-// shallow snapshot test
-it('renders as expected', () => {
-  const tree = renderer.create(themeToggler).toJSON();
-  expect(tree).toMatchSnapshot();
+  // shallow snapshot test
+  it('renders as expected', () => {
+    const tree = renderer.create(themeToggler).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  // click test
+  it('runs onClick handler', () => {
+    const wrapper = Enzyme.shallow(themeToggler);
+    wrapper.simulate('click');
+    expect(onClick.mock.calls.length).toBe(1);
+  });
 });

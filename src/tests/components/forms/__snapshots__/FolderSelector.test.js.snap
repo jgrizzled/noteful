@@ -3,7 +3,7 @@
 exports[`renders as expected 1`] = `
 <select
   className="sc-AykKC iHUrAK"
-  name="folderId"
+  name="folder_id"
   onChange={[Function]}
   value="0"
 >

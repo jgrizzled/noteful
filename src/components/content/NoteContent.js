@@ -24,7 +24,7 @@ const Text = styled.p`
 const NoteContent = () => {
   const params = useParams();
   const { notes } = useContext(NotesContext);
-  const note = notes.find(n => String(n.id) === params.noteId);
+  const note = notes.find(n => n.id === Number(params.note_id));
   if (!note) return <ErrorMessage>Note not found!</ErrorMessage>;
   return (
     <Container>

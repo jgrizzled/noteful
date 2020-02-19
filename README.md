@@ -1,6 +1,6 @@
 # Noteful
 
-React note app for Thinkful. Connects to [noteful-json-server](https://github.com/tomatau/noteful-json-server).
+React note app for Thinkful. Connects to [noteful--server](https://github.com/jgrizzled/noteful-server).
 
 ## Install
 

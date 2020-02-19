@@ -1,15 +1,20 @@
 // sidebar listing folders with Add Folder button
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFolder as faFolderSolid } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFolder as faFolderSolid,
+  faTrashAlt,
+  faPencilAlt
+} from '@fortawesome/free-solid-svg-icons';
 import { faFolder, faFolderOpen } from '@fortawesome/free-regular-svg-icons';
 import styled from 'styled-components';
 import Color from 'color';
 import SidebarHeader from 'components/sidebar/SidebarHeader';
 import Button from 'components/common/Button';
 import NotesContext from 'contexts/NotesContext';
+import DeleteModal from 'components/common/DeleteModal';
 
 const Container = styled.div`
   height: 100%;
@@ -49,10 +54,30 @@ const FolderList = styled.ul`
   }
 `;
 
-const FolderSidebar = () => {
+const IconButton = styled.button`
+  border: 0;
+  background: inherit;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+`;
+
+export default function FolderSidebar() {
   const params = useParams();
   const history = useHistory();
-  const { folders } = useContext(NotesContext);
+  const { folders, deleteFolder } = useContext(NotesContext);
+  const [isModalVisible, setModalVisibility] = useState(false);
+  const toggleDeleteModal = () => {
+    setModalVisibility(!isModalVisible);
+  };
+  const handleDelete = id => {
+    setModalVisibility(false);
+    deleteFolder(id);
+    history.push('/');
+  };
+  const editFolder = id => {
+    history.push(`/editfolder/${id}`);
+  };
   return (
     <Container>
       <SidebarHeader>
@@ -63,10 +88,25 @@ const FolderSidebar = () => {
         {folders.map((f, i) => {
           return (
             <li key={i}>
-              {params.folderId && params.folderId === String(f.id) ? (
+              {params.folder_id && Number(params.folder_id) === f.id ? (
                 <b>
                   <FontAwesomeIcon icon={faFolderOpen} />
                   &nbsp;{f.name}
+                  &nbsp;&nbsp;
+                  <IconButton onClick={toggleDeleteModal}>
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </IconButton>
+                  &nbsp;&nbsp;
+                  <IconButton onClick={() => editFolder(f.id)}>
+                    <FontAwesomeIcon icon={faPencilAlt} />
+                  </IconButton>
+                  {isModalVisible && (
+                    <DeleteModal
+                      message={`Are you sure you want to delete folder ${f.name} and its notes?`}
+                      handleCancel={toggleDeleteModal}
+                      handleDelete={() => handleDelete(f.id)}
+                    />
+                  )}
                 </b>
               ) : (
                 <Link to={`/folder/${f.id}`}>
@@ -82,6 +122,4 @@ const FolderSidebar = () => {
       </Button>
     </Container>
   );
-};
-
-export default FolderSidebar;
+}

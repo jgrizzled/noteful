@@ -1,17 +1,23 @@
 // list of NoteCards in folder
 
 import React, { useContext } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NoteCard from 'components/content/NoteCard';
 import NotesContext from 'contexts/NotesContext';
 import Button from 'components/common/Button';
 import ErrorMessage from 'components/common/ErrorMessage';
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const NoteLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const NoteList = () => {
@@ -19,20 +25,22 @@ const NoteList = () => {
   const history = useHistory();
   const { notes, folders } = useContext(NotesContext);
   let renderNotes = notes;
-  let folderId = '';
-  if (params.folderId) {
-    const matchFolder = folders.find(f => String(f.id) === params.folderId);
+  let folder_id = '';
+  if (params.folder_id) {
+    const matchFolder = folders.find(f => f.id === Number(params.folder_id));
     if (!matchFolder) return <ErrorMessage>Folder not found!</ErrorMessage>;
-    renderNotes = notes.filter(n => String(n.folderId) === params.folderId);
-    folderId = params.folderId;
+    renderNotes = notes.filter(n => n.folder_id === Number(params.folder_id));
+    folder_id = params.folder_id;
   }
   return (
     <Container>
-      <Button large onClick={() => history.push(`/addnote/${folderId}`)}>
+      <Button large onClick={() => history.push(`/addnote/${folder_id}`)}>
         Add Note
       </Button>
       {renderNotes.map((n, i) => (
-        <NoteCard note={n} key={i} />
+        <NoteLink to={`/note/${n.id}`} key={i}>
+          <NoteCard note={n} />
+        </NoteLink>
       ))}
     </Container>
   );

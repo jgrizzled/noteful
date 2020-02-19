@@ -17,9 +17,9 @@ const NoteSidebar = () => {
   const history = useHistory();
   const params = useParams();
   const { notes, folders } = useContext(NotesContext);
-  const note = notes.find(n => String(n.id) === params.noteId);
+  const note = notes.find(n => n.id === Number(params.note_id));
   let folderName = '';
-  if (note) folderName = folders.find(f => String(f.id) === note.folderId).name;
+  if (note) folderName = folders.find(f => f.id === note.folder_id).name;
   return (
     <Container>
       <SidebarHeader>{folderName}</SidebarHeader>

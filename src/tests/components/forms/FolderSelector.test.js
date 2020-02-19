@@ -11,10 +11,10 @@ const notesContextValue = {
   notes: [
     {
       id: '0',
-      name: 'test note',
-      modified: '',
+      title: 'test note',
+      date_modified: '',
       content: '',
-      folderId: '0'
+      folder_id: '0'
     }
   ],
   folders: [
@@ -32,7 +32,7 @@ const component = (
   <BrowserRouter>
     <NotesContext.Provider value={notesContextValue}>
       <ThemeProvider theme={themes.light}>
-        <FolderSelector folderId='0' onChange={() => null} />
+        <FolderSelector folder_id='0' onChange={() => null} />
       </ThemeProvider>
     </NotesContext.Provider>
   </BrowserRouter>

@@ -2,14 +2,14 @@
 
 exports[`renders as expected 1`] = `
 <div
-  className="sc-fzXfMv cicSKb"
+  className="sc-fzXfMB gHTsKT"
 >
   <header
-    className="sc-fzXfMw izYLsN"
+    className="sc-fzXfMC ghslnx"
   >
     <h1>
       <a
-        className="sc-fzXfMx cOsmCJ"
+        className="sc-fzXfMD eJeMSp"
         href="/"
         onClick={[Function]}
       >
@@ -17,7 +17,7 @@ exports[`renders as expected 1`] = `
       </a>
     </h1>
     <span
-      className="sc-fzXfLW ksegiA"
+      className="sc-fzXfMz iWKrbA"
       onClick={[Function]}
     >
       <svg
@@ -40,7 +40,7 @@ exports[`renders as expected 1`] = `
     </span>
   </header>
   <h1
-    className="sc-fzXfLX jZUPWT"
+    className="sc-fzXfMA jXMWTJ"
   >
     Loading...
   </h1>

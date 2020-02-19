@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders as expected 1`] = `
-<div
+<section
   className="sc-AykKG iXeyVM"
 >
   <button
@@ -10,23 +10,35 @@ exports[`renders as expected 1`] = `
   >
     Add Note
   </button>
-  <section
-    className="sc-AykKE dMUvDE"
+  <a
+    className="sc-AykKH bbSDMC"
+    href="/note/0"
     onClick={[Function]}
   >
-    <h2>
-      test note
-    </h2>
-    <p>
-      Last modified on 
-      Invalid date
-      <button
-        className="sc-AykKC sc-AykKD gVWOnP"
-        onClick={[Function]}
-      >
-        Delete
-      </button>
-    </p>
-  </section>
-</div>
+    <div
+      className="sc-AykKE dMUvDE"
+    >
+      <h2>
+        test note
+      </h2>
+      <p>
+        Last modified on
+         
+        Invalid date
+        <button
+          className="sc-AykKC dvCqVy"
+          onClick={[Function]}
+        >
+          Edit
+        </button>
+        <button
+          className="sc-AykKC sc-AykKD gVWOnP"
+          onClick={[Function]}
+        >
+          Delete
+        </button>
+      </p>
+    </div>
+  </a>
+</section>
 `;

@@ -1,14 +1,15 @@
-// card with note name, date, and Delete button
+// card with note title, date, and Delete button
 
 import React, { useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import DeleteButton from 'components/content/DeleteButton';
+import Button from 'components/common/Button';
 import NotesContext from 'contexts/NotesContext';
+import DeleteButton from 'components/common/DeleteButton';
 
-const Card = styled.section`
+const Card = styled.div`
   position: relative;
   background-color: ${props => props.theme.color.surface};
   color: ${props => props.theme.color.onSurface};
@@ -41,19 +42,26 @@ const NoteCard = props => {
   const history = useHistory();
   const { deleteNote } = useContext(NotesContext);
   const params = useParams();
-  const handleClick = (e, noteId) => {
+  const handleDelete = e => {
     e.stopPropagation();
-    deleteNote(noteId);
-    if (params.noteId === String(noteId)) history.push('/');
+    e.preventDefault();
+    deleteNote(props.note.id);
+    if (params.note_id === props.note.id) history.push('/');
   };
+  const handleEdit = e => {
+    e.stopPropagation();
+    e.preventDefault();
+    history.push(`/editnote/${props.note.id}`);
+  };
+
   return (
-    <Card onClick={() => history.push(`/note/${props.note.id}`)}>
-      <h2>{props.note.name}</h2>
+    <Card>
+      <h2>{props.note.title}</h2>
       <p>
-        Last modified on {moment(props.note.modified).format('Do MMM YYYY')}
-        <DeleteButton onClick={e => handleClick(e, props.note.id)}>
-          Delete
-        </DeleteButton>
+        Last modified on{' '}
+        {moment(props.note.date_modified).format('Do MMM YYYY')}
+        <Button onClick={e => handleEdit(e)}>Edit</Button>
+        <DeleteButton onClick={e => handleDelete(e)}>Delete</DeleteButton>
       </p>
     </Card>
   );
@@ -61,11 +69,11 @@ const NoteCard = props => {
 
 NoteCard.propTypes = {
   note: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    folderId: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    folder_id: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired,
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    modified: PropTypes.string.isRequired
+    date_modified: PropTypes.string.isRequired
   })
 };
 

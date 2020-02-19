@@ -15,6 +15,8 @@ import NoteList from 'components/content/NoteList';
 import Error404 from 'components/Error404';
 import AddNote from 'components/forms/AddNote';
 import AddFolder from 'components/forms/AddFolder';
+import EditFolder from 'components/forms/EditFolder';
+import EditNote from 'components/forms/EditNote';
 import ThemeToggler from 'components/ThemeToggler';
 import ErrorBoundary from 'components/common/ErrorBoundary';
 import ErrorMessage from 'components/common/ErrorMessage';
@@ -103,7 +105,7 @@ export default class App extends React.Component {
   addNote = async note => {
     try {
       const id = await notefulServer.addNote(note);
-      if (typeof id === 'string' || typeof id === 'number')
+      if (typeof id === 'number')
         this.setState(prevState => ({
           notes: [...prevState.notes, { ...note, id }]
         }));
@@ -116,14 +118,30 @@ export default class App extends React.Component {
   };
 
   // delete note from server, update state
-  deleteNote = async noteId => {
+  deleteNote = async id => {
     try {
-      const deleteRequest = await notefulServer.deleteNote(noteId);
+      const deleteRequest = await notefulServer.deleteNote(id);
       if (deleteRequest === true)
         this.setState(prevState => ({
-          notes: prevState.notes.filter(n => n.id !== noteId)
+          notes: prevState.notes.filter(n => n.id !== id)
         }));
-      else throw new Error(`Failed to delete note ${noteId}`);
+      else throw new Error(`Failed to delete note ${id}`);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+
+  // patch note on server, update state
+  modifyNote = async note => {
+    try {
+      const modifyRequest = await notefulServer.modifyNote(note);
+      if (modifyRequest === true)
+        this.setState(prevState => ({
+          notes: [...prevState.notes.filter(n => n.id !== note.id), note]
+        }));
+      else throw new Error(`Failed to modify note ${note.id}`);
       return true;
     } catch (e) {
       console.log(e);
@@ -135,7 +153,7 @@ export default class App extends React.Component {
   addFolder = async folder => {
     try {
       const id = await notefulServer.addFolder(folder);
-      if (typeof id === 'string' || typeof id === 'number')
+      if (typeof id === 'number')
         this.setState(prevState => ({
           folders: [...prevState.folders, { ...folder, id }]
         }));
@@ -144,6 +162,42 @@ export default class App extends React.Component {
     } catch (e) {
       console.log(e);
       return null;
+    }
+  };
+
+  // delete folder on server, update state
+  deleteFolder = async id => {
+    try {
+      const deleteRequest = await notefulServer.deleteFolder(id);
+      if (deleteRequest === true)
+        this.setState(prevState => ({
+          folders: prevState.folders.filter(f => f.id !== id),
+          notes: prevState.notes.filter(n => n.folder_id !== id)
+        }));
+      else throw new Error(`Failed to delete folder ${id}`);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+
+  // patch folder on server, update state
+  modifyFolder = async folder => {
+    try {
+      const modifyRequest = await notefulServer.modifyFolder(folder);
+      if (modifyRequest === true)
+        this.setState(prevState => ({
+          folders: [
+            ...prevState.folders.filter(f => f.id !== folder.id),
+            folder
+          ]
+        }));
+      else throw new Error(`Failed to modify folder ${folder.id}`);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
     }
   };
 
@@ -158,7 +212,10 @@ export default class App extends React.Component {
           folders: this.state.folders,
           addNote: this.addNote,
           deleteNote: this.deleteNote,
-          addFolder: this.addFolder
+          modifyNote: this.modifyNote,
+          addFolder: this.addFolder,
+          deleteFolder: this.deleteFolder,
+          modifyFolder: this.modifyFolder
         }}
       >
         <ThemeProvider theme={theme}>
@@ -177,10 +234,10 @@ export default class App extends React.Component {
               <SidebarContainer>
                 <ErrorBoundary>
                   <Switch>
-                    <Route path='/note/:noteId'>
+                    <Route path='/note/:note_id'>
                       <NoteSidebar />
                     </Route>
-                    <Route path={['/folder/:folderId', '/']}>
+                    <Route path={['/folder/:folder_id', '/']}>
                       <FolderSidebar />
                     </Route>
                   </Switch>
@@ -189,17 +246,23 @@ export default class App extends React.Component {
               <ContentContainer>
                 <ErrorBoundary>
                   <Switch>
-                    <Route path='/note/:noteId'>
+                    <Route path='/note/:note_id'>
                       <NoteContent />
                     </Route>
-                    <Route path='/folder/:folderId'>
+                    <Route path='/folder/:folder_id'>
                       <NoteList />
                     </Route>
-                    <Route path='/addnote/:folderId?'>
+                    <Route path='/addnote/:folder_id?'>
                       <AddNote />
                     </Route>
                     <Route path='/addfolder'>
                       <AddFolder />
+                    </Route>
+                    <Route path='/editfolder/:folder_id'>
+                      <EditFolder />
+                    </Route>
+                    <Route path='/editnote/:note_id'>
+                      <EditNote />
                     </Route>
                     <Route path='/' exact>
                       <NoteList />

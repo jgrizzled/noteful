@@ -7,34 +7,7 @@ import themes from 'styles/themes';
 import NoteCard from 'components/content/NoteCard';
 import NotesContext from 'contexts/NotesContext';
 
-const notesContextValue = {
-  notes: [
-    {
-      id: '0',
-      name: 'test note',
-      modified: '',
-      content: '',
-      folderId: '0'
-    }
-  ],
-  folders: [
-    {
-      id: '0',
-      name: 'test folder'
-    }
-  ],
-  addNote: () => true,
-  deleteNote: () => true,
-  addFolder: () => true
-};
-
-const note = {
-  id: '0',
-  name: 'test note',
-  modified: '',
-  content: '',
-  folderId: '0'
-};
+const note = notesContextValue.notes[0];
 
 const component = (
   <BrowserRouter>

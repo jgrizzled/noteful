@@ -5,27 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import NoteContent from 'components/content/NoteContent';
 import NotesContext from 'contexts/NotesContext';
 
-const notesContextValue = {
-  notes: [
-    {
-      id: '0',
-      name: 'test note',
-      modified: '',
-      content: '',
-      folderId: '0'
-    }
-  ],
-  folders: [
-    {
-      id: '0',
-      name: 'test folder'
-    }
-  ],
-  addNote: () => true,
-  deleteNote: () => true,
-  addFolder: () => true
-};
-
 const component = (
   <BrowserRouter>
     <NotesContext.Provider value={notesContextValue}>

@@ -7,27 +7,6 @@ import themes from 'styles/themes';
 import NoteSideBar from 'components/sidebar/NoteSidebar';
 import NotesContext from 'contexts/NotesContext';
 
-const notesContextValue = {
-  notes: [
-    {
-      id: '0',
-      name: 'test note',
-      modified: '',
-      content: '',
-      folderId: '0'
-    }
-  ],
-  folders: [
-    {
-      id: '0',
-      name: 'test folder'
-    }
-  ],
-  addNote: () => true,
-  deleteNote: () => true,
-  addFolder: () => true
-};
-
 const component = (
   <BrowserRouter>
     <NotesContext.Provider value={notesContextValue}>

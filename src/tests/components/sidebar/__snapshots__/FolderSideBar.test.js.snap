@@ -2,7 +2,7 @@
 
 exports[`renders as expected 1`] = `
 <div
-  className="sc-AykKE jkKtbi"
+  className="sc-AykKJ kLVcHD"
 >
   <h2
     className="sc-AykKC getTdx"
@@ -27,7 +27,7 @@ exports[`renders as expected 1`] = `
      Folders
   </h2>
   <ul
-    className="sc-AykKF fdLCxs"
+    className="sc-AykKK cNrtRx"
   >
     <li>
       <a
